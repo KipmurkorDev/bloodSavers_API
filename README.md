@@ -35,6 +35,7 @@ The API server will be accessible at `http://localhost:3000`.
 ## Usage
 
 BloodSavers API offers endpoints for user authentication, donor information retrieval, and file uploads.
+The deployed link is here https://blood-savers-api.vercel.app/
 
 ## Endpoints
 
