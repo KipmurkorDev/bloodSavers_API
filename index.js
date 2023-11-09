@@ -28,9 +28,7 @@ mongoose
 
 app.use("", router);
 
-// const port = process.env.PORT || 3000;
-// app.listen(port, () => {
-//   console.log(`Server running ....${port}`);
-// });
-
-module.exports.handler = serverless(app);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running ....${port}`);
+});
