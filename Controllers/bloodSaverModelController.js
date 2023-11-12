@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const moongoose = require("mongoose");
 
 dotenv.config();
-const path = require("path");
 
 const userSignup = async (req, res) => {
   try {
@@ -21,28 +20,16 @@ const userSignup = async (req, res) => {
       phone,
     } = req.body;
 
-    const absolutePath = req.file ? req.file.path : null;
-    let profile;
-
-    if (absolutePath) {
-      const relativePath = path.relative(
-        path.join(__dirname, "../profiles"),
-        absolutePath
-      );
-      profile = `/profiles/${relativePath.replace(/\\/g, "/")}`;
-    }
     const errors = {};
-
     if (!name) errors.name = "Full Name is required.";
     if (!email) errors.email = "Email is required.";
     if (!password) errors.password = "Password is required.";
-    if (!profile) errors.profile = "Profile picture is required.";
+    if (!req.file) errors.profile = "Profile picture is required.";
     if (!country) errors.country = "Country is required.";
     if (!bloodGroup) errors.bloodGroup = "Blood Group is required.";
     if (!state) errors.state = "State is required.";
     if (!city) errors.city = "City is required.";
     if (!phone) errors.phone = "Phone is required.";
-
     if (Object.keys(errors).length > 0) {
       return res.status(400).json({
         status: "error",
@@ -51,7 +38,6 @@ const userSignup = async (req, res) => {
     }
 
     const existingUser = await bloodSaverModel.findOne({ email });
-
     if (existingUser) {
       return res.status(409).json({
         status: "error",
@@ -70,7 +56,7 @@ const userSignup = async (req, res) => {
       city,
       phone,
       userType,
-      profile,
+      profile: req.file.path,
       password: hashedPassword,
     });
 

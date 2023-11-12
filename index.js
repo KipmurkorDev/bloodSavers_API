@@ -15,8 +15,6 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
-app.use("/tmp", express.static(path.join(__dirname, "profiles")));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
