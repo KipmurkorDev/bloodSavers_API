@@ -1,6 +1,5 @@
 const express = require("express");
 require("dotenv").config();
-const serverless = require("serverless-http");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");

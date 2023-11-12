@@ -30,26 +30,11 @@ const upload = multer({ storage: storage });
 
 const userRouter = express.Router();
 
-userRouter.post(
-  "/signup",
-  upload.single("profile"),
-  handleFileUpload,
-  userSignup
-);
+userRouter.post("/signup", upload.single("profile"), userSignup);
 userRouter.post("/login", userLogin);
 userRouter.get("/", getDonors);
 userRouter.get("/search", getSearch);
 userRouter.use(authMiddleware);
 userRouter.get("/:donorId", getDonorDetail);
-
-function handleFileUpload(req, res, next) {
-  if (!req.file) {
-    return res.status(400).json({
-      status: "error",
-      message: "Image file is required.",
-    });
-  }
-  next();
-}
 
 module.exports = userRouter;
