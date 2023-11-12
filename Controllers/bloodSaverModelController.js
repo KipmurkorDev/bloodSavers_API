@@ -23,16 +23,15 @@ const userSignup = async (req, res) => {
 
     const absolutePath = req.file ? req.file.path : null;
     let profile;
+    console.log(absolutePath);
 
     if (absolutePath) {
-      // Calculate relative path from the 'profiles' directory
       const relativePath = path.relative(
         path.join(__dirname, "../profiles"),
         absolutePath
       );
       profile = `/profiles/${relativePath.replace(/\\/g, "/")}`;
     }
-
     const errors = {};
 
     if (!name) errors.name = "Full Name is required.";
@@ -76,7 +75,7 @@ const userSignup = async (req, res) => {
       password: hashedPassword,
     });
 
-    return res.status(200).json({
+    return res.status(201).json({
       status: "success",
       message: "User successfully registered",
     });

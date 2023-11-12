@@ -12,6 +12,7 @@ const {
 } = require("../Controllers/bloodSaverModelController");
 
 const UPLOAD_PATH = path.join(__dirname, "../profiles");
+const PROFILE_FIELD_NAME = "profile";
 
 if (!fs.existsSync(UPLOAD_PATH)) {
   fs.mkdirSync(UPLOAD_PATH);
@@ -30,7 +31,7 @@ const upload = multer({ storage: storage });
 
 const userRouter = express.Router();
 
-userRouter.post("/signup", upload.single("profile"), userSignup);
+userRouter.post("/signup", upload.single(PROFILE_FIELD_NAME), userSignup);
 userRouter.post("/login", userLogin);
 userRouter.get("/", getDonors);
 userRouter.get("/search", getSearch);
