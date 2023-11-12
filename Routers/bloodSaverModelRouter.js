@@ -11,8 +11,8 @@ const {
   getDonorDetail,
 } = require("../Controllers/bloodSaverModelController");
 
-const UPLOAD_PATH = path.join(__dirname, "../profiles");
-const PROFILE_FIELD_NAME = "profile";
+const UPLOAD_PATH = path.join(__dirname, "../tmp");
+const PROFILE_FIELD_NAME = "tmp";
 
 if (!fs.existsSync(UPLOAD_PATH)) {
   fs.mkdirSync(UPLOAD_PATH);
