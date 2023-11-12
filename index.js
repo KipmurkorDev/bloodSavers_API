@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const router = require("./Routers");
-
+const path = require("path");
 const corsOptions = {
   origin: "*",
 };
@@ -15,7 +15,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
-app.use(express.static("profiles"));
+app.use("/profiles", express.static(path.join(__dirname, "profiles")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
