@@ -6,7 +6,7 @@ const moongoose = require("mongoose");
 
 dotenv.config();
 const path = require("path");
-const { default: mongoose } = require("mongoose");
+
 const userSignup = async (req, res) => {
   try {
     const {
@@ -25,9 +25,12 @@ const userSignup = async (req, res) => {
     let profile;
 
     if (absolutePath) {
-      const rootPath = __dirname;
-      const relativePath = path.relative(rootPath, absolutePath);
-      profile = relativePath.replace(/\\/g, "/");
+      // Calculate relative path from the 'profiles' directory
+      const relativePath = path.relative(
+        path.join(__dirname, "../profiles"),
+        absolutePath
+      );
+      profile = `/profiles/${relativePath.replace(/\\/g, "/")}`;
     }
 
     const errors = {};
@@ -201,7 +204,6 @@ const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const errors = {};
-
     if (!email) {
       errors.email = "Email is required.";
     }
