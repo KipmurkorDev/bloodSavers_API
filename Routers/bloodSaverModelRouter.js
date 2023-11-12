@@ -12,7 +12,7 @@ const {
 } = require("../Controllers/bloodSaverModelController");
 
 const UPLOAD_PATH = path.join(__dirname, "../tmp");
-const PROFILE_FIELD_NAME = "tmp";
+const PROFILE_FIELD_NAME = "profile";
 
 if (!fs.existsSync(UPLOAD_PATH)) {
   fs.mkdirSync(UPLOAD_PATH);
