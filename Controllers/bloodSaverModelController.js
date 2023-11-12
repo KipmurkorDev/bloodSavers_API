@@ -23,7 +23,6 @@ const userSignup = async (req, res) => {
 
     const absolutePath = req.file ? req.file.path : null;
     let profile;
-    console.log(absolutePath);
 
     if (absolutePath) {
       const relativePath = path.relative(
@@ -33,6 +32,7 @@ const userSignup = async (req, res) => {
       profile = `/profiles/${relativePath.replace(/\\/g, "/")}`;
     }
     const errors = {};
+    console.log(profile);
 
     if (!name) errors.name = "Full Name is required.";
     if (!email) errors.email = "Email is required.";
