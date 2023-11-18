@@ -2,7 +2,7 @@ const bloodSaverModel = require("../Model/bloodSaverModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
-const moongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 dotenv.config();
 
