@@ -75,13 +75,10 @@ const userSignup = async (req, res) => {
 
 const getDonors = async (req, res) => {
   try {
-    const response = await bloodSaverModel
-      .find(
-        { userType: "donor" },
-        { name: 1, profile: 1, bloodGroup: 1, city: 1, country: 1 }
-      )
-      .limit(10);
-
+    const response = await bloodSaverModel.find(
+      { userType: "donor" },
+      { name: 1, profile: 1, bloodGroup: 1, city: 1, country: 1 }
+    );
     return res.status(200).json({ status: "success", data: response });
   } catch (error) {
     return res.status(500).json({
