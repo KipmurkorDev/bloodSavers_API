@@ -4,6 +4,7 @@ const authMiddleware = require("../Middleware/authVerification");
 const {
   userSignup,
   userLogin,
+  getHeros,
   getDonors,
   getSearch,
   getDonorDetail,
@@ -18,6 +19,8 @@ userRouter.post("/signup", upload.single("profile"), userSignup);
 userRouter.post("/login", userLogin);
 userRouter.get("/", getDonors);
 userRouter.get("/search", getSearch);
+userRouter.get("/heros", getHeros);
+
 userRouter.use(authMiddleware);
 userRouter.get("/:donorId", getDonorDetail);
 
