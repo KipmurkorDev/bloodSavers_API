@@ -88,8 +88,22 @@ const getDonors = async (req, res) => {
     });
   }
 };
+const getRecipient = async (req, res) => {
+  try {
+    const response = await bloodSaverModel.find(
+      { userType: "recipient" },
+      { name: 1, profile: 1, bloodGroup: 1, city: 1, country: 1 }
+    );
+    return res.status(200).json({ status: "success", data: response });
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      message: "Internal server error occurred.",
+      error: error.message,
+    });
+  }
+};
 const getHeros = async (req, res) => {
-  console.log("Hello heros");
   try {
     const response = await bloodSaverModel
       .find(
@@ -257,4 +271,5 @@ module.exports = {
   getSearch,
   getDonorDetail,
   getHeros,
+  getRecipient,
 };

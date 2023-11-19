@@ -8,6 +8,7 @@ const {
   getDonors,
   getSearch,
   getDonorDetail,
+  getRecipient,
 } = require("../Controllers/bloodSaverModelController");
 const { storage } = require("../Script/cloudinary");
 
@@ -19,8 +20,8 @@ userRouter.post("/signup", upload.single("profile"), userSignup);
 userRouter.post("/login", userLogin);
 userRouter.get("/", getDonors);
 userRouter.get("/search", getSearch);
+userRouter.get("/recipient", getRecipient);
 userRouter.get("/heros", getHeros);
-
 userRouter.use(authMiddleware);
 userRouter.get("/:donorId", getDonorDetail);
 
