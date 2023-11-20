@@ -141,20 +141,31 @@ const getSearch = async (req, res) => {
     } else {
       searchBloodGroup = uppercaseBloodGroup;
     }
-    const response = await bloodSaverModel.find(
-      {
-        $or: [
+
+    let query;
+
+    if (name) {
+      query = {
+        $and: [
           {
-            $and: [
-              { name: name },
-              { $or: [{ country: name }, { city: name }] },
-            ],
+            $or: [{ name: name }, { country: name }, { city: name }],
           },
           { bloodGroup: searchBloodGroup },
         ],
-      },
-      { name: 1, profile: 1, bloodGroup: 1, city: 1, country: 1 }
-    );
+      };
+    } else {
+      query = {
+        bloodGroup: searchBloodGroup,
+      };
+    }
+
+    const response = await bloodSaverModel.find(query, {
+      name: 1,
+      profile: 1,
+      bloodGroup: 1,
+      city: 1,
+      country: 1,
+    });
 
     return res.status(200).json({ status: "success", data: response });
   } catch (error) {
